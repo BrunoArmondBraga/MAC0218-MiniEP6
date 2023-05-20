@@ -1,0 +1,14 @@
+#construindo a imagem inicial do Caddy
+sudo docker image build . -t custom-caddy:2.5.0-alpine
+
+#executando o contêiner
+sudo docker container run --name my-caddy-server --publish 8080:80 -d custom-caddy:2.5.0-alpine
+
+#parando a execução do contêiner
+sudo docker container stop my-caddy-server
+
+#apagando o contêiner
+sudo docker container rm my-caddy-server
+
+#executando o contêiner da parte 2 (usando volumes do Docker)
+sudo docker container run --name my-caddy-server --publish 8080:80 -v ./files:/usr/src/pages -v ./caddy:/etc/caddy -d custom-caddy:2.5.0-alpine
